@@ -1,10 +1,14 @@
 package org.example;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 
 class TemperatureConverterTest {
     TemperatureConverter converter = new TemperatureConverter();
+    double DELTA = 0.001;
 
     @Test
     void testFahrenheitToCelsius() {
@@ -35,7 +39,14 @@ class TemperatureConverterTest {
 
     @Test
     void testBoundaryValues() {
-        assertFalse(TemperatureConverter.isExtremeTemperature(-40));
-        assertFalse(TemperatureConverter.isExtremeTemperature(50));
+        assertFalse(converter.isExtremeTemperature(-40));
+        assertFalse(converter.isExtremeTemperature(50));
+    }
+
+    @ParameterizedTest
+    @CsvSource({"0, -273.15", "100, -173.15", "300, 26.85"})
+    void testKelvinToCelsius(double kelvin, double celsius) {
+        double result = converter.kelvinToCelsius(kelvin);
+            assertEquals(celsius, result, DELTA, "kelvin to celsius failed");
     }
 }
