@@ -9,18 +9,23 @@ jobs:
 
     steps:
       - name: Checkout PR branch
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: Fetch coverage-data branch
+          
+      - name: Install jacoco2cobertura
         run: |
-          git fetch origin coverage-data
-          git checkout origin/coverage-data -- coverage.xml
+          pip install jacoco2cobertura
+
+      - name: Convert Jacoco to Cobertura
+        run: |
+          jacoco2cobertura target/site/jacoco/jacoco.xml \
+           --output cobertura.xml
 
       - name: Generate Coverage Summary
-        uses: devmasx/jacoco-badge-generator@v2
+        uses: irongut/CodeCoverageSummary@v1.3.0
         with:
           filename: 'coverage.xml'
-          format: 'markdown'
+          format: 'cobertura'
           output: 'both'
           badge: true
 
