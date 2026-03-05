@@ -21,11 +21,11 @@ pipeline {
             }
         }
 
-        stage('Build') {
-            steps {
-                bat 'mvn clean install'
-            }
-        }
+        //stage('Build') {
+        //    steps {
+        //        bat 'mvn clean install'
+        //    }
+        //}
 
         stage('Generate Report') {
             steps {
@@ -41,7 +41,7 @@ pipeline {
 
         stage('Publish Coverage Report') {
             steps {
-                jacoco()
+                jacoco execPattern: 'target/jacoco.exec'
             }
         }
 
