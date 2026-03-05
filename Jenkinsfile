@@ -21,6 +21,12 @@ pipeline {
             }
         }
 
+        stage('Check maven') {
+            steps {
+                bat 'mvn -v'
+            }
+        }
+
         stage('Build') {
             steps {
                 bat 'mvn clean install'
