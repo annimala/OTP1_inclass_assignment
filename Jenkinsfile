@@ -48,7 +48,11 @@ pipeline {
 
         stage('Publish Coverage Report') {
             steps {
-                jacoco()
+                jacoco(
+                    execPattern: 'target/jacoco.exec',
+                    classPattern: 'target/classes',
+                    sourcePattern: 'src/main/java'
+                )
             }
         }
 
