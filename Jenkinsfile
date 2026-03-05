@@ -29,7 +29,7 @@ pipeline {
 
         stage('Generate Report') {
             steps {
-                bat 'mvn jacoco:report'
+                bat 'mvn clean verify'
             }
         }
 
