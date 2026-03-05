@@ -17,6 +17,7 @@ pipeline {
 
         stage('Checkout') {
             steps {
+                git branch: 'main',
                 git 'https://github.com/annimala/OTP1_inclass_assignment.git'
             }
         }
