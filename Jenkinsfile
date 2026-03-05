@@ -21,9 +21,10 @@ pipeline {
             }
         }
 
-        stage('Check maven') {
+        stage('Check directory') {
             steps {
-                bat 'mvn -v'
+                bat 'dir'
+                bat 'type pom.xml'
             }
         }
 
