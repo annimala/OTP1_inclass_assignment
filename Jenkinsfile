@@ -21,13 +21,6 @@ pipeline {
             }
         }
 
-        stage('Check directory') {
-            steps {
-                bat 'dir'
-                bat 'type pom.xml'
-            }
-        }
-
         stage('Build') {
             steps {
                 bat 'mvn clean install'
@@ -43,6 +36,15 @@ pipeline {
         stage('Publish Test Results') {
             steps {
                 junit '**/target/surefire-reports/*.xml'
+            }
+        }
+
+        stage('Debug Files') {
+            steps {
+                bat 'dir target'
+                bat 'dir target\\classes'
+                bat 'dir target\\test-classes'
+                bat 'dir target\\site\\jacoco'
             }
         }
 
