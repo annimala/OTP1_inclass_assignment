@@ -27,6 +27,12 @@ pipeline {
             }
         }
 
+        stage('Test') {
+            steps {
+                'mvn test'
+            }
+        }
+
         stage('Generate Report') {
             steps {
                 bat 'mvn jacoco:report'
