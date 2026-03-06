@@ -45,21 +45,10 @@ pipeline {
             }
         }
 
-        stage('Debug Files') {
-            steps {
-                bat 'dir target'
-                bat 'dir target\\classes'
-                bat 'dir target\\test-classes'
-                bat 'dir target\\site\\jacoco'
-            }
-        }
 
         stage('Publish Coverage Report') {
             steps {
                 jacoco(
-                    execPattern: "${env.WORKSPACE}\\target\\jacoco.exec",
-                    classPattern: "${env.WORKSPACE}\\target\\classes",
-                    sourcePattern: "${env.WORKSPACE}\\src\\main\\java"
                 )
             }
         }
